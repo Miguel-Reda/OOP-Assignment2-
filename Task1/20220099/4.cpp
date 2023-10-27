@@ -1,10 +1,10 @@
-// File: ………cpp
-// Purpose:
-// Author:
+// File: 4.cpp
+// Purpose: find all the prime numbers up to some upper limit n
+// Author: Joseph Sameh Fouad
 // Section: S9 Wednesday 2nd slot
-// ID:
+// ID: 20220099
 // TA: Samar Sabry Shaker
-// Date: …… Oct 2023
+// Date: 27 Oct 2023
 
 //                                libraries
 #include "bits/stdc++.h"
