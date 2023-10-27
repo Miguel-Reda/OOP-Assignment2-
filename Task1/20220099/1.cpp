@@ -104,35 +104,36 @@ output
 
 void solve()
 {
-  char phrase[150];
-  cin.getline(phrase, 150, '.');
+  cout<<"Enter a sentence to correct spacing, letters, and capitalization.\n";
+  char sentence[101];
+  cin.getline(sentence, 101, '.');
   bool first = 1;
   for (int i = 0; i < 150; i++)
   {
-    if (phrase[i] == '\0')
+    if (sentence[i] == '\0')
     {
       break;
     }
-    else if (first && isalpha(phrase[i]))
+    else if (first && isalpha(sentence[i]))
     {
-      cout << char(toupper(phrase[i]));
+      cout << char(toupper(sentence[i]));
       first = 0;
     }
-    else if (phrase[i] == ' ' && (phrase[i - 1] == ' ' || phrase[i - 1] == '\n'))
+    else if (sentence[i] == ' ' && (sentence[i - 1] == ' ' || sentence[i - 1] == '\n'))
     {
       continue;
     }
-    else if (phrase[i] == '\n' && (phrase[i - 1] == ' ' || phrase[i - 1] == '\n'))
+    else if (sentence[i] == '\n' && (sentence[i - 1] == ' ' || sentence[i - 1] == '\n'))
     {
       continue;
     }
-    else if (phrase[i] == '\n' || phrase[i] == ' ')
+    else if (sentence[i] == '\n' || sentence[i] == ' ')
     {
       cout << ' ';
     }
     else
     {
-      cout << char(tolower(phrase[i]));
+      cout << char(tolower(sentence[i]));
     }
   }
   cout << ".\n";
@@ -158,7 +159,7 @@ int main()
 {
   definations(), test_cases_definations();
 
-  fio;
+  // fio;
   // ifs;
   // ofs;
   ts { solve(); }
