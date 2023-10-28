@@ -4,7 +4,7 @@
 
 using namespace std;
 
-bool BigReal:: isValid(string num) {
-    return (regex_match (num, regex("[+-]?\\d*\\.?\\d*")));
+bool BigReal:: isValidReal(string realNumber) {
+    return (regex_match (realNumber, regex("[+-]?\\d*\\.?\\d*")));
 }
 
