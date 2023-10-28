@@ -39,5 +39,9 @@ int main()
     cout << "Enter the delimiter";
     cin >> delimiter;
     result = split(target, delimiter);
+    for (size_t i = 0; i < result.size(); i++)
+    {
+        cout<<result[i]<<" ";
+    }
     
 }
