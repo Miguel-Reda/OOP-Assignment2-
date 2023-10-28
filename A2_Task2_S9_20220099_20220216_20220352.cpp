@@ -91,6 +91,6 @@ int main()
   // cout << n3;
   // n3 = n3 + BigReal(0.9);
   BigReal n1("-99.0");
-  BigReal n2("-99.0");
-  cout<< (n1 < n2);
+  BigReal n2("+99.0");
+  cout<< (n1 > n2);
 }

@@ -194,3 +194,150 @@ bool BigReal::operator<(BigReal Big_Real_2)
   }
   return 0;
 }
+
+
+bool BigReal::operator>(BigReal Big_Real_2)
+{
+  if (Big_Real[0] == '-' && Big_Real_2.Big_Real[0] != '-')
+  {
+    return 0;
+  }
+  else if (Big_Real[0] != '-' && Big_Real_2.Big_Real[0] == '-')
+  {
+    return 1;
+  }
+  else if (Big_Real[0] == '-' && Big_Real_2.Big_Real[0] == '-')
+  {
+    int size1=0, size2=0;
+    for (auto digit : Big_Real)
+    {
+      if (digit != '.')
+      {
+        ++size1;
+      }
+      else
+      {
+        break;
+      }
+    }
+    for (auto digit : Big_Real_2.Big_Real)
+    {
+      if (digit != '.')
+      {
+        ++size2;
+      }
+      else
+      {
+        break;
+      }
+    }
+    if (size1 > size2)
+    {
+      return 0;
+    }
+    else if (size1 < size2)
+    {
+      return 1;
+    }
+    else
+    {
+      for (int i = 0; i < size1; i++)
+      {
+        if (Big_Real[i] > Big_Real_2.Big_Real[i])
+        {
+          return 0;
+        }
+        else if (Big_Real[i] < Big_Real_2.Big_Real[i])
+        {
+          return 1;
+        }
+      }
+
+      for (int i = size1 + 1; i < Big_Real.size(); i++)
+      {
+        if (Big_Real[i] > Big_Real_2.Big_Real[i])
+        {
+          return 0;
+        }
+        else if (Big_Real[i] < Big_Real_2.Big_Real[i])
+        {
+          return 1;
+        }
+      }
+
+      if (Big_Real.size() < Big_Real_2.Big_Real.size())
+      {
+        return 1;
+      }
+      return 0;
+    }
+  }
+  else
+  {
+    int size1=0, size2=0;
+    for (auto digit : Big_Real)
+    {
+      if (digit != '.')
+      {
+        ++size1;
+      }
+      else
+      {
+        break;
+      }
+    }
+    for (auto digit : Big_Real_2.Big_Real)
+    {
+      if (digit != '.')
+      {
+        ++size2;
+      }
+      else
+      {
+        break;
+      }
+    }
+    if (size1 > size2)
+    {
+      return 1;
+    }
+    else if (size1 < size2)
+    {
+      return 0;
+    }
+    else
+    {
+      for (int i = 0; i < size1; i++)
+      {
+        if (Big_Real[i] > Big_Real_2.Big_Real[i])
+        {
+          return 1;
+        }
+        else if (Big_Real[i] < Big_Real_2.Big_Real[i])
+        {
+          return 0;
+        }
+      }
+
+      for (int i = size1 + 1; i < Big_Real.size(); i++)
+      {
+        if (Big_Real[i] > Big_Real_2.Big_Real[i])
+        {
+          return 1;
+        }
+        else if (Big_Real[i] < Big_Real_2.Big_Real[i])
+        {
+          return 0;
+        }
+      }
+
+      if (Big_Real.size() <= Big_Real_2.Big_Real.size())
+      {
+        return 0;
+      }
+      return 1;
+    }
+  }
+  return 1;
+}
+
