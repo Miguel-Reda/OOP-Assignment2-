@@ -10,11 +10,6 @@ bool BigReal::isValidReal(string realNumber)
   return (regex_match(realNumber, regex("[+-]?\\d*\\.?\\d*")));
 }
 
-BigReal::BigReal()
-{
-  Big_Real = "0.0";
-}
-
 BigReal::BigReal(string realNumber)
 {
   if (isValidReal(realNumber))
@@ -376,4 +371,11 @@ bool BigReal::operator!=(BigReal Big_Real_2)
     }
     return 0;
   }
+}
+
+
+ostream &operator<<(ostream &out, BigReal Real)
+{
+  out << Real.Big_Real;
+  return out;
 }

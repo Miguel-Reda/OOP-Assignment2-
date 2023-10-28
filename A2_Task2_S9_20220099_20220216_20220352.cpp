@@ -52,7 +52,6 @@ other info.
 Break your code into: header file, implementation file and application file.
 */
 
-
 /*
 It is required to separate your design into a header file and an implementation file. You should also
 validate that the passed parameter in case of string is a valid real number. Note that 1. and .1 are
@@ -91,6 +90,7 @@ int main()
   // cout << n3;
   // n3 = n3 + BigReal(0.9);
   BigReal n1("-99123.0346");
-  BigReal n2("+99123.0346");
-  cout<< (n1 != n2);
+  BigReal n2;
+  cout << (n1 != n2) << endl;
+  cout << n2;
 }
