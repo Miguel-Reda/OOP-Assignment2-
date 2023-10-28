@@ -21,9 +21,9 @@ public:
   BigReal operator+(BigReal &other);
   BigReal operator-(BigReal &other);
 
-  bool operator<(BigReal anotherReal);
-  bool operator>(BigReal anotherReal);
-  bool operator==(BigReal anotherReal);
-  bool operator!=(BigReal anotherReal);
+  bool operator<(BigReal Big_Real_2);
+  bool operator>(BigReal Big_Real_2);
+  bool operator==(BigReal Big_Real_2);
+  bool operator!=(BigReal Big_Real_2);
   friend ostream &operator<<(ostream &out, BigReal num);
 };
