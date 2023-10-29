@@ -4,6 +4,7 @@
 #include "BigReallib.h"
 #define ll long long
 using namespace std;
+
 bool BigReal::isValidReal(string realNumber)
 {
   return (regex_match(realNumber, regex("[+-]?\\d*\\.?\\d*")));
@@ -19,16 +20,19 @@ BigReal::BigReal(string realNumber)
   {
     cout << "invalid number";
   }
+  DecimalSize();
 }
 
 BigReal::BigReal(const BigReal &other)
 { // Copy Constructor
   Big_Real = other.Big_Real;
+  DecimalSize();
 }
 
 BigReal &BigReal::operator=(BigReal &other)
 { // Assignment Operator
   Big_Real = other.Big_Real;
+  DecimalSize();
   return other;
 }
 
@@ -44,6 +48,24 @@ int BigReal::sign()
   }
 }
 
+int BigReal::DecimalSize()
+{
+  Decimal_Size = 0;
+  for (auto digit : Big_Real)
+  {
+    if (digit != '.')
+    {
+      ++Decimal_Size;
+    }
+    else
+    {
+      break;
+    }
+  }
+  --Decimal_Size;
+  return Decimal_Size;
+}
+
 bool BigReal::operator<(BigReal Big_Real_2)
 {
   if (Big_Real[0] == '-' && Big_Real_2.Big_Real[0] != '-')
@@ -56,40 +78,17 @@ bool BigReal::operator<(BigReal Big_Real_2)
   }
   else if (Big_Real[0] == '-' && Big_Real_2.Big_Real[0] == '-')
   {
-    ll size1 = 0, size2 = 0;
-    for (auto digit : Big_Real)
-    {
-      if (digit != '.')
-      {
-        ++size1;
-      }
-      else
-      {
-        break;
-      }
-    }
-    for (auto digit : Big_Real_2.Big_Real)
-    {
-      if (digit != '.')
-      {
-        ++size2;
-      }
-      else
-      {
-        break;
-      }
-    }
-    if (size1 > size2)
+    if (Decimal_Size > Big_Real_2.Decimal_Size)
     {
       return 1;
     }
-    else if (size1 < size2)
+    else if (Decimal_Size < Big_Real_2.Decimal_Size)
     {
       return 0;
     }
     else
     {
-      for (ll i = 0; i < size1; i++)
+      for (ll i = 0; i < Decimal_Size; i++)
       {
         if (Big_Real[i] > Big_Real_2.Big_Real[i])
         {
@@ -101,8 +100,8 @@ bool BigReal::operator<(BigReal Big_Real_2)
         }
       }
       ll limit = min(Big_Real.size(), Big_Real_2.Big_Real.size());
-      ll i = size1 + 1;
-      for (i = size1 + 1; i < limit; i++)
+      ll i = Decimal_Size + 2;
+      for (i = Decimal_Size + 2; i < limit; i++)
       {
         if (Big_Real[i] > Big_Real_2.Big_Real[i])
         {
@@ -141,40 +140,17 @@ bool BigReal::operator<(BigReal Big_Real_2)
   }
   else
   {
-    ll size1 = 0, size2 = 0;
-    for (auto digit : Big_Real)
-    {
-      if (digit != '.')
-      {
-        ++size1;
-      }
-      else
-      {
-        break;
-      }
-    }
-    for (auto digit : Big_Real_2.Big_Real)
-    {
-      if (digit != '.')
-      {
-        ++size2;
-      }
-      else
-      {
-        break;
-      }
-    }
-    if (size1 > size2)
+    if (Decimal_Size > Big_Real_2.Decimal_Size)
     {
       return 0;
     }
-    else if (size1 < size2)
+    else if (Decimal_Size < Big_Real_2.Decimal_Size)
     {
       return 1;
     }
     else
     {
-      for (ll i = 0; i < size1; i++)
+      for (ll i = 0; i < Decimal_Size; i++)
       {
         if (Big_Real[i] > Big_Real_2.Big_Real[i])
         {
@@ -187,8 +163,8 @@ bool BigReal::operator<(BigReal Big_Real_2)
       }
 
       ll limit = min(Big_Real.size(), Big_Real_2.Big_Real.size());
-      ll i = size1 + 1;
-      for (i = size1 + 1; i < limit; i++)
+      ll i = Decimal_Size + 2;
+      for (i = Decimal_Size + 2; i < limit; i++)
       {
         if (Big_Real[i] > Big_Real_2.Big_Real[i])
         {
@@ -240,40 +216,17 @@ bool BigReal::operator>(BigReal Big_Real_2)
   }
   else if (Big_Real[0] == '-' && Big_Real_2.Big_Real[0] == '-')
   {
-    ll size1 = 0, size2 = 0;
-    for (auto digit : Big_Real)
-    {
-      if (digit != '.')
-      {
-        ++size1;
-      }
-      else
-      {
-        break;
-      }
-    }
-    for (auto digit : Big_Real_2.Big_Real)
-    {
-      if (digit != '.')
-      {
-        ++size2;
-      }
-      else
-      {
-        break;
-      }
-    }
-    if (size1 > size2)
+    if (Decimal_Size > Big_Real_2.Decimal_Size)
     {
       return 0;
     }
-    else if (size1 < size2)
+    else if (Decimal_Size < Big_Real_2.Decimal_Size)
     {
       return 1;
     }
     else
     {
-      for (ll i = 0; i < size1; i++)
+      for (ll i = 0; i < Decimal_Size; i++)
       {
         if (Big_Real[i] > Big_Real_2.Big_Real[i])
         {
@@ -286,8 +239,8 @@ bool BigReal::operator>(BigReal Big_Real_2)
       }
 
       ll limit = min(Big_Real.size(), Big_Real_2.Big_Real.size());
-      ll i = size1 + 1;
-      for (i = size1 + 1; i < limit; i++)
+      ll i = Decimal_Size + 2;
+      for (i = Decimal_Size + 2; i < limit; i++)
       {
         if (Big_Real[i] > Big_Real_2.Big_Real[i])
         {
@@ -326,40 +279,17 @@ bool BigReal::operator>(BigReal Big_Real_2)
   }
   else
   {
-    ll size1 = 0, size2 = 0;
-    for (auto digit : Big_Real)
-    {
-      if (digit != '.')
-      {
-        ++size1;
-      }
-      else
-      {
-        break;
-      }
-    }
-    for (auto digit : Big_Real_2.Big_Real)
-    {
-      if (digit != '.')
-      {
-        ++size2;
-      }
-      else
-      {
-        break;
-      }
-    }
-    if (size1 > size2)
+    if (Decimal_Size > Big_Real_2.Decimal_Size)
     {
       return 1;
     }
-    else if (size1 < size2)
+    else if (Decimal_Size < Big_Real_2.Decimal_Size)
     {
       return 0;
     }
     else
     {
-      for (ll i = 0; i < size1; i++)
+      for (ll i = 0; i < Decimal_Size; i++)
       {
         if (Big_Real[i] > Big_Real_2.Big_Real[i])
         {
@@ -372,8 +302,8 @@ bool BigReal::operator>(BigReal Big_Real_2)
       }
 
       ll limit = min(Big_Real.size(), Big_Real_2.Big_Real.size());
-      ll i = size1 + 1;
-      for (i = size1 + 1; i < limit; i++)
+      ll i = Decimal_Size + 2;
+      for (i = Decimal_Size + 2; i < limit; i++)
       {
         if (Big_Real[i] > Big_Real_2.Big_Real[i])
         {
