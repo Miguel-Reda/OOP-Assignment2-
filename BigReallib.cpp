@@ -384,7 +384,16 @@ bool BigReal::operator!=(BigReal Big_Real_2)
 
 ostream &operator<<(ostream &out, BigReal Real)
 {
-  out << Real.Big_Real;
+  if (Real.Big_Real.size() == Real.Decimal_Size + 3 && (Real.Big_Real.back() == '0'))
+  {
+    string integer = Real.Big_Real;
+    integer.pop_back();
+    integer.pop_back();
+    out << integer;
+  }
+  else
+  {
+    out << Real.Big_Real;
+  }
   return out;
 }
-
