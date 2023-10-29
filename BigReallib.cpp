@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <regex>
+#include <string>
 #include "BigReallib.h"
 #define ll long long
 using namespace std;
@@ -386,3 +387,4 @@ ostream &operator<<(ostream &out, BigReal Real)
   out << Real.Big_Real;
   return out;
 }
+

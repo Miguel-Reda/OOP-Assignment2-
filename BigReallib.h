@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#define ll long long
+
 using namespace std;
 class BigReal
 {
