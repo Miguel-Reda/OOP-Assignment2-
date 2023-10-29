@@ -4,7 +4,7 @@
 // Section: S9 Wednesday 2nd slot
 // ID:20220352
 // TA: Samar Sabry Shaker
-// Date: 28 Oct 2023#include <bits/stdc++.h>
+// Date: 28 Oct 2023
 #include <bits/stdc++.h>
 using namespace std;
 //part a
