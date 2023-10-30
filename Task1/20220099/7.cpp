@@ -6,12 +6,6 @@
 // TA: Samar Sabry Shaker
 // Date: 27 Oct 2023
 
-/*
- *
- *  @author: 	Joseph_Sameh
- *  @version:	1.0
- */
-
 //                                libraries
 #include "bits/stdc++.h"
 // #include <iostream>
@@ -50,7 +44,7 @@ char di[] = {'D', 'L', 'U', 'R'};
 int dx[] = {1, 0, -1, 0, -1, -1, 1, 1};
 int dy[] = {0, -1, 0, 1, -1, 1, -1, 1};
 
-void apush_backtional_definations()
+void additional_definations()
 {
   /*
   #define NULL nullptr
@@ -96,21 +90,110 @@ void remember_section()
 //_________________________________________________________________________________//
 /*
 input
+Test case :
+Test case :1
+ 5 ==>size
+ 2 6
+ 6 1
+ 1 4
+ 4 4
+ 4 3
+ success
 
+ Test case 2:
+ 4==>size
+ 2 6
+ 6 1
+ 4 4
+ 4 3
 */
 
 /*
 output
 
 */
-struct dominoT
+
+vector<vector<string>> res; // It will be a store in which the Permutations values are stored
+vector<string> result;      // It will be a store in which result of chain domino
+
+void permute(vector<pair<string, string>> &a)
 {
-  int leftDots;
-  int rightDots;
-};
+  sort(a.begin(), a.end());
+  do
+  {
+    vector<string> n;
+    for (auto x : a)
+    {
+      n.push_back(x.first);
+      n.push_back(x.second);
+    }
+    res.push_back(n); // store Permutation cases
+  } while (next_permutation(a.begin(), a.end()));
+}
+
+bool FormsDominoChain(vector<pair<string, string>> &dominos)
+{
+  permute(dominos);
+  for (auto x : res)
+  {
+    bool success = true;
+    result = x;
+    for (int i = 2; i < x.size() - 1; i += 2)
+    {
+      if (x[i] != x[i - 1])
+      {
+        success = false;
+        break;
+      }
+    }
+
+    if (success == true)
+    {
+      return 1;
+    }
+  }
+  return 0;
+}
 
 void solve()
 {
+  int size;
+  cout << "Enter the number of Domino ==>";
+  cin >> size;
+  // vector<dominoT> vector(size);
+  vector<pair<string, string>> vector(size);
+  cout << "Enter two number of domino left first, then right" << endl;
+
+  for (auto &x : vector)
+  {
+    cin >> x.first;
+    cin >> x.second;
+  }
+  if (FormsDominoChain(vector))
+  {
+    cout << "True, it's possible to build a chain consisting of every domino in the vector" << endl;
+    // to print answer
+    for (int i = 0; i < result.size(); i++)
+    {
+      if (i == result.size() - 1)
+      {
+        cout << result[i]; // not to print |
+        continue;
+      }
+      if (i & 1)
+      {
+        cout << result[i] << " — ";
+      }
+      else
+      {
+        cout << result[i] << "|";
+      }
+    }
+  }
+  else
+  {
+    cout << "False, it's impossible to build a chain consisting of every domino in the vector" << endl;
+  }
 }
 /*
 _________________________________________________________________________________

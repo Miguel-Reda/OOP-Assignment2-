@@ -28,5 +28,6 @@ public:
   bool operator>(BigReal Big_Real_2);
   bool operator==(BigReal Big_Real_2);
   bool operator!=(BigReal Big_Real_2);
-  friend ostream &operator<<(ostream &out, BigReal num);
+  friend ostream &operator<<(ostream &out, BigReal &Real);
+  friend istream &operator>>(istream &in, BigReal &Real);
 };

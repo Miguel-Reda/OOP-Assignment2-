@@ -16,12 +16,12 @@ BigReal::BigReal(string realNumber)
   if (isValidReal(realNumber))
   {
     Big_Real = realNumber;
+    DecimalSize();
   }
   else
   {
-    cout << "invalid number";
+    cout << "invalid number\n";
   }
-  DecimalSize();
 }
 
 BigReal::BigReal(const BigReal &other)
@@ -382,7 +382,7 @@ bool BigReal::operator!=(BigReal Big_Real_2)
   }
 }
 
-ostream &operator<<(ostream &out, BigReal Real)
+ostream &operator<<(ostream &out, BigReal &Real)
 {
   if (Real.Big_Real.size() == Real.Decimal_Size + 3 && (Real.Big_Real.back() == '0'))
   {
@@ -396,4 +396,25 @@ ostream &operator<<(ostream &out, BigReal Real)
     out << Real.Big_Real;
   }
   return out;
+}
+
+istream &operator>>(istream &in, BigReal &Real)
+{
+  string test_Real;
+  in >> test_Real;
+  if (test_Real[0] != '-' && test_Real[0] != '+')
+  {
+    test_Real = '+' + test_Real;
+  }
+
+  if (Real.isValidReal(test_Real))
+  {
+    Real.Big_Real = test_Real;
+    Real.DecimalSize();
+  }
+  else
+  {
+    cout << "invalid number\n";
+  }
+  return in;
 }
