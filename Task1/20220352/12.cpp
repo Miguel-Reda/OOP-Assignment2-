@@ -7,7 +7,7 @@
 // Date: 29 Oct 2023
 #include <bits/stdc++.h>
 using namespace std;
-map<string, int> phishingKeywords = {
+map<string, int> Phishing_keywords = {
     {"password", 3},
     {"account", 3},
     {"verify", 3},
@@ -40,23 +40,28 @@ map<string, int> phishingKeywords = {
     {"secret", 1}};
 int main()
 {
-    int Total_count = 0;
     string file_name, track;
     cin >> file_name;
-    ifstream input_file(file_name);
+    freopen("words.txt", "r", stdin);
+    int Total_count = 0;
+    // ifstream input_file(file_name);
     map<string, int> found_words;
-    while (input_file >> track)
+    while (cin >> track)
     {
         transform(track.begin(), track.end(), track.begin(), ::tolower);
-        if (phishingKeywords.find(track) != phishingKeywords.end())
+        if (Phishing_keywords.find(track) != Phishing_keywords.end())
         {
             found_words[track]++;
-            Total_count += phishingKeywords[track];
+            Total_count += Phishing_keywords[track];
         }
     }
-    for (auto it = found_words.begin(); it != found_words.end(); it++)
+    /* for (auto it = found_words.begin(); it != found_words.end(); it++)
     {
         cout << it->first << "  " << it->second << '\n';
-    }
+    } */
+      for (auto [x, y] : found_words)
+      {
+          cout << x << "  " << y << '\n';
+      }
     cout << "Total count is: " << Total_count;
 }
