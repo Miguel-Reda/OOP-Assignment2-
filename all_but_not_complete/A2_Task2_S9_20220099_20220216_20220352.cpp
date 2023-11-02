@@ -16,7 +16,7 @@
 
 int main()
 {
-    BigReal op1("-34324.324"), op2("-34324.3241");
+    BigReal op1(1e7), op2("-34324.3241");
     cout<< (op1 < op2);
 
 
