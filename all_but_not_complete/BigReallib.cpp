@@ -34,6 +34,13 @@ BigReal::BigReal(string realNumber)
     DecimalSize();
 }
 
+BigReal::BigReal(double realNumber)
+{
+    Big_Real = to_string(realNumber);
+    Big_Real = formattedReal(Big_Real);
+    
+}
+
 int BigReal::size()  //gets the size of the given number
 {
     return Big_Real.size();
