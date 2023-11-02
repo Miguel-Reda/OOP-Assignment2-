@@ -1,8 +1,8 @@
 // File: ………cpp
-// Purpose:
-// Author:
+// Purpose: convert male speech to neutral
+// Author: Ammar Mohamed Mahmoud Hamed
 // Section: S9 Wednesday 2nd slot
-// ID:
+// ID: 20220216
 // TA: Samar Sabry Shaker
 // Date: …… Oct 2023
 #include <iostream>
