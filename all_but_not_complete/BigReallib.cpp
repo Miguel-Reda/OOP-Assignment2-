@@ -17,7 +17,34 @@ BigReal::BigReal(string realNumber)
     {
 
 
-        if (Big_Real[0] != '-')
+
+
+        if (realNumber[0] != '-')
+        {
+            number_sign = 1; // returns 1 as a positive value
+        }
+        else
+        {
+
+            number_sign = -1; // returns -1 as a negative value
+
+        }
+        Big_Real = formattedReal(realNumber);
+        DecimalSize();
+
+    }
+    else
+    {
+        cout << "invalid number";
+    }
+
+}
+BigReal::BigReal(double realNumber) {
+    string number = to_string(realNumber);
+
+
+
+        if (number[0] != '-')
         {
             number_sign = 1; // returns 1 as a positive value
         }
@@ -25,32 +52,20 @@ BigReal::BigReal(string realNumber)
         {
             number_sign = -1; // returns -1 as a negative value
         }
-        Big_Real = formattedReal(realNumber);
-    }
-    else
-    {
-        cout << "invalid number";
-    }
-    DecimalSize();
+        Big_Real = formattedReal(number);
+        DecimalSize();
+
+
+
 }
 
-BigReal::BigReal(double realNumber)
-{
-    Big_Real = to_string(realNumber);
-    Big_Real = formattedReal(Big_Real);
-    
-}
 
 int BigReal::size()  //gets the size of the given number
 {
     return Big_Real.size();
 }
 
-BigReal::BigReal(const BigReal &other)
-{ // Copy Constructor
-    Big_Real = other.Big_Real;
-    DecimalSize();
-}
+
 
 BigReal &BigReal::operator=(const BigReal &other)
 { // Assignment Operator
@@ -67,7 +82,7 @@ int BigReal::sign()
 
 int BigReal::DecimalSize()
 {
-    int Decimal_Size = Big_Real.find('.');
+    Decimal_Size = Big_Real.find('.');
     return Decimal_Size;
 }
 
@@ -108,76 +123,87 @@ string BigReal::formattedReal(string realNumber) {
 }
 
 
-BigReal operator+(BigReal first ,BigReal other){
+BigReal BigReal:: operator+ (BigReal other){
+    BigReal result = *this;
 
-    int dotp = first.DecimalSize();
+    int dotp = result.DecimalSize();
     int dotp2 = other.DecimalSize();
-    int frac1 = first.size() - dotp;
+    int frac1 = result.size() - dotp;
     int frac2 = other.size() - dotp2;
 
     //zero padding
     if (dotp > dotp2){
         other.Big_Real.insert(0,dotp - dotp2,'0');
+
     }
     else if (dotp2 > dotp){
-        first.Big_Real.insert(0,dotp2 - dotp , '0');
+        result.Big_Real.insert(0,dotp2 - dotp , '0');
+
     }
+
     if (frac1 > frac2){
         other.Big_Real.append(frac1-frac2,'0');
 
+
     } else if (frac2 > frac1){
-        first.Big_Real.append(frac2-frac1,'0');
+        result.Big_Real.append(frac2-frac1,'0');
+
     }
 
-    if (first.sign() * other.sign() == 1) {
-        string::reverse_iterator f = first.Big_Real.rbegin();
+
+    if (result.number_sign * other.number_sign == 1) {
+        string::reverse_iterator f = result.Big_Real.rbegin();
         string::reverse_iterator o = other.Big_Real.rbegin();
         int carry(0);
-        for (; f != first.Big_Real.rend(); f++, o++) {
+        for (; f != result.Big_Real.rend(); f++, o++) {
             if (*f == '.') continue;
             int sum = ((*f - '0') + (*o - '0')) + carry;
             carry = sum / 10;
             sum %= 10;
             *f = sum + '0';
 
-        }
-        if (carry) first.Big_Real.insert(0, "1");
 
-        return first;
+        }
+        if (carry) result.Big_Real.insert(0, "1");
+
+        return result;
     }
 
     else{
         bool flag(0);
-        if (first.sign() == -1){
-            first.number_sign = 1;
+        if (result.sign() == -1){
+            result.number_sign = 1;
             flag = true;
         }
         else{
             other.number_sign = 1;
 
         }
-        if (first < other){
-            swap(first,other);
+        if (result < other){
+            swap(result,other);
+
             if (!flag){
-                first.number_sign = -1;
+                result.number_sign = -1;
             }
 
         }
-        else if (!(other<first)){
-            first.Big_Real = "0.0";
-            return first;
+        else if (!(other<result)){
+
+            result.Big_Real = "0.0";
+            return result;
         }
         else{
+
             if (flag){
-                first.number_sign = -1;
+                result.number_sign = -1;
 
             }
 
         }
-        string::reverse_iterator f = first.Big_Real.rbegin();
+        string::reverse_iterator f = result.Big_Real.rbegin();
         string::reverse_iterator o = other.Big_Real.rbegin();
         int carry(0);
-        for (; f != first.Big_Real.rend(); f++, o++) {
+        for (; f != result.Big_Real.rend(); f++, o++) {
             if (*f == '.') continue;
             int sum = ((*f) - (*o)) - carry;
             if (sum < 0){
@@ -192,8 +218,8 @@ BigReal operator+(BigReal first ,BigReal other){
 
         }
 
-
-        return first;
+        result.Big_Real = formattedReal(result.Big_Real);
+        return result;
     }
 
 
@@ -507,16 +533,7 @@ bool BigReal::operator!=(BigReal Big_Real_2)
 
 ostream &operator<<(ostream &out, BigReal Real)
 {
-    if (Real.Big_Real.size() == Real.Decimal_Size + 3 && (Real.Big_Real.back() == '0'))
-    {
-        string integer = Real.Big_Real;
-        integer.pop_back();
-        integer.pop_back();
-        out << integer;
-    }
-    else
-    {
-        out << Real.Big_Real;
-    }
+    if (Real.number_sign == -1) cout << '-';
+    cout << Real.Big_Real;
     return out;
 }
