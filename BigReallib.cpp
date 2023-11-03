@@ -8,7 +8,7 @@ using namespace std;
 
 bool BigReal::isValidReal(string realNumber)
 {
-  return (regex_match(realNumber, regex("[+-]?\\d*\\.?\\d*")));
+  return (regex_match(realNumber, regex("[+-]?\\d*\\.?\\d*")) /* && realNumber.size() > 1 */);
 }
 
 BigReal::BigReal(string realNumber)
@@ -21,6 +21,7 @@ BigReal::BigReal(string realNumber)
   else
   {
     cout << "invalid number\n";
+    Big_Real = "0.0";
   }
 }
 

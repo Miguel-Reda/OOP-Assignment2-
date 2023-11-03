@@ -90,7 +90,6 @@ void remember_section()
 //_________________________________________________________________________________//
 /*
 input
-Test case :
 Test case :1
  5 ==>size
  2 6
@@ -100,7 +99,23 @@ Test case :1
  4 3
  success
 
- Test case 2:
+Test case :2
+
+10
+
+1 2
+2 3
+8 9
+3 4
+5 6
+6 7
+10 1
+7 8
+4 5
+9 10
+success
+
+ Test case 3:
  4==>size
  2 6
  6 1
@@ -113,34 +128,17 @@ output
 
 */
 
-vector<vector<string>> res; // It will be a store in which the Permutations values are stored
-vector<string> result;      // It will be a store in which result of chain domino
-
-void permute(vector<pair<string, string>> &a)
-{
-  sort(a.begin(), a.end());
-  do
-  {
-    vector<string> n;
-    for (auto x : a)
-    {
-      n.push_back(x.first);
-      n.push_back(x.second);
-    }
-    res.push_back(n); // store Permutation cases
-  } while (next_permutation(a.begin(), a.end()));
-}
+vector<string> result; // It will be a store in which result of chain domino
 
 bool FormsDominoChain(vector<pair<string, string>> &dominos)
 {
-  permute(dominos);
-  for (auto x : res)
+  sort(dominos.begin(), dominos.end());
+  do
   {
     bool success = true;
-    result = x;
-    for (int i = 2; i < x.size() - 1; i += 2)
+    for (int j = 1; j < dominos.size(); j++)
     {
-      if (x[i] != x[i - 1])
+      if (dominos[j].first != dominos[j - 1].second)
       {
         success = false;
         break;
@@ -149,9 +147,15 @@ bool FormsDominoChain(vector<pair<string, string>> &dominos)
 
     if (success == true)
     {
+      for (int i = 0; i < dominos.size(); i++)
+      {
+        result.push_back(dominos[i].first);
+        result.push_back(dominos[i].second);
+      }
       return 1;
     }
-  }
+  } while (next_permutation(dominos.begin(), dominos.end()));
+
   return 0;
 }
 
@@ -163,7 +167,6 @@ void solve()
   // vector<dominoT> vector(size);
   vector<pair<string, string>> vector(size);
   cout << "Enter two number of domino left first, then right" << endl;
-
   for (auto &x : vector)
   {
     cin >> x.first;
@@ -177,7 +180,7 @@ void solve()
     {
       if (i == result.size() - 1)
       {
-        cout << result[i]; // not to print |
+        cout << result[i]; // not to print — in the end
         continue;
       }
       if (i & 1)
