@@ -12,7 +12,6 @@ private:
   bool isValidReal(string realNumber); // True if correct real
 
 public:
-  int Decimal_Size;
   BigReal(double realNumber);                // Initialize double
   BigReal(string realNumber = "0.0");        // Default constructor
   BigReal(const BigReal &other);             // Copy constructor

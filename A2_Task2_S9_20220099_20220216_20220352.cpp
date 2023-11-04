@@ -17,8 +17,6 @@ using namespace std;
 
 //                                                    just nots
 
-
-
 /*
 Test your class with a small application and 12 test cases that test all these functions.
 Each team member will take one of the parts of the class after designing it carefully together.
@@ -52,10 +50,14 @@ int main()
   // BigReal n3 = n1 + n2;
   // cout << n3;
   // n3 = n3 + BigReal(0.9);
-  BigReal n1(".1");
+  BigReal n1("99");
+  BigReal n2("99");
+  BigReal n3 = n1 + n2;
+  cout << n3 << endl;
+  cout << n3.DecimalSize() << endl;
   // cout << n1 << endl;
   // n1.setNum("99.001");
-  cout << n1 << endl;
+  // cout << n1 << endl;
   // BigReal n2;
   // cin>>n2;
   // BigReal n2("+99.0");
