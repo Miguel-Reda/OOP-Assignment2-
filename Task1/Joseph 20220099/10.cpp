@@ -1,10 +1,10 @@
-// File: ………cpp
-// Purpose:
-// Author:
+// File: 10.cpp
+// Purpose: Message Altering to Avoid Censorship.
+// Author: Joseph Sameh Fouad
 // Section: S9 Wednesday 2nd slot
-// ID:
+// ID: 20220099
 // TA: Samar Sabry Shaker
-// Date: …… Oct 2023
+// Date: 11 Nov 2023
 
 #include <iostream>
 #include <fstream>
