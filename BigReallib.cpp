@@ -25,7 +25,6 @@ BigReal::BigReal(string realNumber)
       number_sign = -1; // returns -1 as a negative value
     }
     Big_Real = formattedReal(realNumber);
-    DecimalSize();
   }
   else
   {
@@ -47,7 +46,6 @@ BigReal::BigReal(double realNumber)
     number_sign = -1; // returns -1 as a negative value
   }
   Big_Real = formattedReal(number);
-  DecimalSize();
 }
 
 BigReal::BigReal(const BigReal &other)
@@ -239,17 +237,18 @@ bool BigReal::operator<(BigReal Big_Real_2)
   }
   else if (sign() == -1 && Big_Real_2.sign() == -1)
   {
-    if (DecimalSize() > Big_Real_2.DecimalSize())
+    int Decimal_Size = DecimalSize();
+    if (Decimal_Size > Big_Real_2.DecimalSize())
     {
       return 1;
     }
-    else if (DecimalSize() < Big_Real_2.DecimalSize())
+    else if (Decimal_Size < Big_Real_2.DecimalSize())
     {
       return 0;
     }
     else
     {
-      for (ll i = 0; i < DecimalSize(); i++)
+      for (ll i = 0; i < Decimal_Size; i++)
       {
         if (Big_Real[i] > Big_Real_2.Big_Real[i])
         {
@@ -261,7 +260,7 @@ bool BigReal::operator<(BigReal Big_Real_2)
         }
       }
       ll limit = min(Big_Real.size(), Big_Real_2.Big_Real.size());
-      ll i = DecimalSize() + 1;
+      ll i = Decimal_Size + 1;
       for (; i < limit; i++)
       {
         if (Big_Real[i] > Big_Real_2.Big_Real[i])
@@ -289,17 +288,18 @@ bool BigReal::operator<(BigReal Big_Real_2)
   }
   else
   {
-    if (DecimalSize() > Big_Real_2.DecimalSize())
+    int Decimal_Size = DecimalSize();
+    if (Decimal_Size > Big_Real_2.DecimalSize())
     {
       return 0;
     }
-    else if (DecimalSize() < Big_Real_2.DecimalSize())
+    else if (Decimal_Size < Big_Real_2.DecimalSize())
     {
       return 1;
     }
     else
     {
-      for (ll i = 0; i < DecimalSize(); i++)
+      for (ll i = 0; i < Decimal_Size; i++)
       {
         if (Big_Real[i] > Big_Real_2.Big_Real[i])
         {
@@ -312,7 +312,7 @@ bool BigReal::operator<(BigReal Big_Real_2)
       }
 
       ll limit = min(Big_Real.size(), Big_Real_2.Big_Real.size());
-      ll i = DecimalSize() + 1;
+      ll i = Decimal_Size + 1;
       for (; i < limit; i++)
       {
         if (Big_Real[i] > Big_Real_2.Big_Real[i])
@@ -349,17 +349,18 @@ bool BigReal::operator>(BigReal Big_Real_2)
   }
   else if (sign() == -1 && Big_Real_2.sign() == -1)
   {
-    if (DecimalSize() > Big_Real_2.DecimalSize())
+    int Decimal_Size = DecimalSize();
+    if (Decimal_Size > Big_Real_2.DecimalSize())
     {
       return 0;
     }
-    else if (DecimalSize() < Big_Real_2.DecimalSize())
+    else if (Decimal_Size < Big_Real_2.DecimalSize())
     {
       return 1;
     }
     else
     {
-      for (ll i = 0; i < DecimalSize(); i++)
+      for (ll i = 0; i < Decimal_Size; i++)
       {
         if (Big_Real[i] > Big_Real_2.Big_Real[i])
         {
@@ -371,7 +372,7 @@ bool BigReal::operator>(BigReal Big_Real_2)
         }
       }
       ll limit = min(Big_Real.size(), Big_Real_2.Big_Real.size());
-      ll i = DecimalSize() + 1;
+      ll i = Decimal_Size + 1;
       for (; i < limit; i++)
       {
         if (Big_Real[i] > Big_Real_2.Big_Real[i])
@@ -399,17 +400,18 @@ bool BigReal::operator>(BigReal Big_Real_2)
   }
   else
   {
-    if (DecimalSize() > Big_Real_2.DecimalSize())
+    int Decimal_Size = DecimalSize();
+    if (Decimal_Size > Big_Real_2.DecimalSize())
     {
       return 1;
     }
-    else if (DecimalSize() < Big_Real_2.DecimalSize())
+    else if (Decimal_Size < Big_Real_2.DecimalSize())
     {
       return 0;
     }
     else
     {
-      for (ll i = 0; i < DecimalSize(); i++)
+      for (ll i = 0; i < Decimal_Size; i++)
       {
         if (Big_Real[i] > Big_Real_2.Big_Real[i])
         {
@@ -422,7 +424,7 @@ bool BigReal::operator>(BigReal Big_Real_2)
       }
 
       ll limit = min(Big_Real.size(), Big_Real_2.Big_Real.size());
-      ll i = DecimalSize() + 1;
+      ll i = Decimal_Size + 1;
       for (; i < limit; i++)
       {
         if (Big_Real[i] > Big_Real_2.Big_Real[i])
@@ -529,7 +531,6 @@ istream &operator>>(istream &in, BigReal &Real)
       Real.number_sign = -1; // returns -1 as a negative value
     }
     Real.Big_Real = Real.formattedReal(test_Real);
-    Real.DecimalSize();
   }
   else
   {
@@ -552,7 +553,6 @@ void BigReal::setNum(string realNumber)
       number_sign = -1; // returns -1 as a negative value
     }
     Big_Real = formattedReal(realNumber);
-    DecimalSize();
   }
   else
   {
@@ -573,5 +573,4 @@ void BigReal::setNum(double realNumber)
     number_sign = -1; // returns -1 as a negative value
   }
   Big_Real = formattedReal(number);
-  DecimalSize();
 }
