@@ -30,6 +30,7 @@ BigReal::BigReal(string realNumber)
   {
     cout << "invalid number\n";
     Big_Real = "0.0";
+    number_sign = 1;
   }
 }
 
@@ -536,6 +537,7 @@ istream &operator>>(istream &in, BigReal &Real)
   {
     cout << "invalid number";
     Real.Big_Real = "0.0";
+    Real.number_sign = 1;
   }
   return in;
 }

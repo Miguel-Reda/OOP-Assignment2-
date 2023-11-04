@@ -50,12 +50,12 @@ int main()
   // BigReal n3 = n1 + n2;
   // cout << n3;
   // n3 = n3 + BigReal(0.9);
-  BigReal n1("99");
-  BigReal n2("99");
-  BigReal n3 = n1 + n2;
+  BigReal n1("0.1");
+  BigReal n2("0.0000000000000001");
+  BigReal n3 = n1 - n2;
   cout << n3 << endl;
   cout << n3.DecimalSize() << endl;
-  // cout << n1 << endl;
+  // cout << n1 << endl
   // n1.setNum("99.001");
   // cout << n1 << endl;
   // BigReal n2;
