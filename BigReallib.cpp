@@ -232,310 +232,355 @@ BigReal BigReal::operator-(BigReal other)
 
 bool BigReal::operator<(BigReal Big_Real_2)
 {
+  // Check if the signs of the two BigReal numbers are different
   if (sign() != Big_Real_2.sign())
   {
     return (sign() < Big_Real_2.sign());
   }
+  // Both numbers have the same sign, so we need to compare them further
   else if (sign() == -1 && Big_Real_2.sign() == -1)
   {
+    // Decimal_Size stores the number of decimal digits
     int Decimal_Size = DecimalSize();
     if (Decimal_Size > Big_Real_2.DecimalSize())
     {
-      return 1;
+      return 1; // Return true if current number has more decimal digits
     }
     else if (Decimal_Size < Big_Real_2.DecimalSize())
     {
-      return 0;
+      return 0; // Return false if current number has fewer decimal digits
     }
     else
     {
+      // Both numbers have the same number of decimal digits, so we need to compare them digit by digit
       for (ll i = 0; i < Decimal_Size; i++)
       {
         if (Big_Real[i] > Big_Real_2.Big_Real[i])
         {
-          return 1;
+          return 1; // Return true if current digit is greater in current number
         }
         else if (Big_Real[i] < Big_Real_2.Big_Real[i])
         {
-          return 0;
+          return 0; // Return false if current digit is greater in Big_Real_2
         }
       }
+      // If all decimal digits are equal, compare the remaining digits
       ll limit = min(Big_Real.size(), Big_Real_2.Big_Real.size());
       ll i = Decimal_Size + 1;
       for (; i < limit; i++)
       {
         if (Big_Real[i] > Big_Real_2.Big_Real[i])
         {
-          return 1;
+          return 1; // Return true if current digit is greater in current number
         }
         else if (Big_Real[i] < Big_Real_2.Big_Real[i])
         {
-          return 0;
+          return 0; // Return false if current digit is greater in Big_Real_2
         }
       }
+      // If all digits are equal, compare the total number of digits
       if (Big_Real.size() > Big_Real_2.Big_Real.size())
       {
-        return 1;
+        return 1; // Return true if current number has more total digits
       }
       else if (Big_Real.size() < Big_Real_2.Big_Real.size())
       {
-        return 0;
+        return 0; // Return false if current number has fewer total digits
       }
       else
       {
-        return 0;
+        return 0; // Return false if both numbers have the same total digits
       }
     }
   }
   else
   {
+    // Both numbers have the same positive sign, so we need to compare them further
     int Decimal_Size = DecimalSize();
     if (Decimal_Size > Big_Real_2.DecimalSize())
     {
-      return 0;
+      return 0; // Return false if current number has more decimal digits
     }
     else if (Decimal_Size < Big_Real_2.DecimalSize())
     {
-      return 1;
+      return 1; // Return true if current number has fewer decimal digits
     }
     else
     {
+      // Both numbers have the same number of decimal digits, so we need to compare them digit by digit
       for (ll i = 0; i < Decimal_Size; i++)
       {
         if (Big_Real[i] > Big_Real_2.Big_Real[i])
         {
-          return 0;
+          return 0; // Return false if current digit is greater in current number
         }
         else if (Big_Real[i] < Big_Real_2.Big_Real[i])
         {
-          return 1;
+          return 1; // Return true if current digit is greater in Big_Real_2
         }
       }
 
+      // If all decimal digits are equal, compare the remaining digits
       ll limit = min(Big_Real.size(), Big_Real_2.Big_Real.size());
       ll i = Decimal_Size + 1;
       for (; i < limit; i++)
       {
         if (Big_Real[i] > Big_Real_2.Big_Real[i])
         {
-          return 0;
+          return 0; // Return false if current digit is greater in current number
         }
         else if (Big_Real[i] < Big_Real_2.Big_Real[i])
         {
-          return 1;
+          return 1; // Return true if current digit is greater in Big_Real_2
         }
       }
+
+      // If all digits are equal, compare the total number of digits
       if (Big_Real.size() > Big_Real_2.Big_Real.size())
       {
-        return 0;
+        return 0; // Return false if current number has more total digits
       }
       else if (Big_Real.size() < Big_Real_2.Big_Real.size())
       {
-        return 1;
+        return 1; // Return true if current number has fewer total digits
       }
       else
       {
-        return 0;
+        return 0; // Return false if both numbers have the same total digits
       }
     }
   }
-  return 0;
+  return 0; // Default case, should not reach here
 }
 
 bool BigReal::operator>(BigReal Big_Real_2)
 {
+  // Check if the signs of the two BigReal numbers are different
   if (sign() != Big_Real_2.sign())
   {
-    return (sign() > Big_Real_2.sign());
+    return (sign() > Big_Real_2.sign()); // Return true if current sign is greater than Big_Real_2 sign
   }
+  // Both numbers have the same sign, so we need to compare them further
   else if (sign() == -1 && Big_Real_2.sign() == -1)
   {
+    // Decimal_Size stores the number of decimal digits
     int Decimal_Size = DecimalSize();
+    // Compare the number of decimal digits
     if (Decimal_Size > Big_Real_2.DecimalSize())
     {
-      return 0;
+      return 0; // Return false if current number has more decimal digits
     }
     else if (Decimal_Size < Big_Real_2.DecimalSize())
     {
-      return 1;
+      return 1; // Return true if current number has fewer decimal digits
     }
     else
     {
+      // Both numbers have the same number of decimal digits, so we need to compare them digit by digit
       for (ll i = 0; i < Decimal_Size; i++)
       {
         if (Big_Real[i] > Big_Real_2.Big_Real[i])
         {
-          return 0;
+          return 0; // Return false if current digit is greater in current number
         }
         else if (Big_Real[i] < Big_Real_2.Big_Real[i])
         {
-          return 1;
+          return 1; // Return true if current digit is greater in Big_Real_2
         }
       }
+      // If all decimal digits are equal, compare the remaining digits
       ll limit = min(Big_Real.size(), Big_Real_2.Big_Real.size());
       ll i = Decimal_Size + 1;
       for (; i < limit; i++)
       {
         if (Big_Real[i] > Big_Real_2.Big_Real[i])
         {
-          return 0;
+          return 0; // Return false if current digit is greater in current number
         }
         else if (Big_Real[i] < Big_Real_2.Big_Real[i])
         {
-          return 1;
+          return 1; // Return true if current digit is greater in Big_Real_2
         }
       }
+      // If all digits are equal, compare the total number of digits
       if (Big_Real.size() > Big_Real_2.Big_Real.size())
       {
-        return 0;
+        return 0; // Return false if current number has more total digits
       }
       else if (Big_Real.size() < Big_Real_2.Big_Real.size())
       {
-        return 1;
+        return 1; // Return true if current number has fewer total digits
       }
       else
       {
-        return 0;
+        return 0; // Return false if both numbers have the same total digits
       }
     }
   }
   else
   {
+    // Both numbers have the same positive sign, so we need to compare them further
     int Decimal_Size = DecimalSize();
     if (Decimal_Size > Big_Real_2.DecimalSize())
     {
-      return 1;
+      return 1; // Return true if current number has more decimal digits
     }
     else if (Decimal_Size < Big_Real_2.DecimalSize())
     {
-      return 0;
+      return 0; // Return false if current number has fewer decimal digits
     }
     else
     {
+      // Both numbers have the same number of decimal digits, so we need to compare them digit by digit
       for (ll i = 0; i < Decimal_Size; i++)
       {
         if (Big_Real[i] > Big_Real_2.Big_Real[i])
         {
-          return 1;
+          return 1; // Return true if current digit is greater in current number
         }
         else if (Big_Real[i] < Big_Real_2.Big_Real[i])
         {
-          return 0;
+          return 0; // Return false if current digit is greater in Big_Real_2
         }
       }
 
+      // If all decimal digits are equal, compare the remaining digits
       ll limit = min(Big_Real.size(), Big_Real_2.Big_Real.size());
       ll i = Decimal_Size + 1;
       for (; i < limit; i++)
       {
         if (Big_Real[i] > Big_Real_2.Big_Real[i])
         {
-          return 1;
+          return 1; // Return true if current digit is greater in current number
         }
         else if (Big_Real[i] < Big_Real_2.Big_Real[i])
         {
-          return 0;
+          return 0; // Return false if current digit is greater in Big_Real_2
         }
       }
+      // If all digits are equal, compare the total number of digits
       if (Big_Real.size() > Big_Real_2.Big_Real.size())
       {
-        return 1;
+        return 1; // Return true if current number has more total digits
       }
       else if (Big_Real.size() < Big_Real_2.Big_Real.size())
       {
-        return 0;
+        return 0; // Return false if current number has fewer total digits
       }
       else
       {
-        return 0;
+        return 0; // Return false if both numbers have the same total digits
       }
     }
   }
-  return 0;
+  return 0; // Default case, should not reach here
 }
 
 bool BigReal::operator==(BigReal Big_Real_2)
 {
+  // Check if the sizes of the Big_Real vectors are not equal
   if (Big_Real.size() != Big_Real_2.Big_Real.size())
   {
-    return 0;
+    return 0; // Return false if sizes are different
   }
   else
   {
+    // Sizes are equal, so we need to compare the elements of the vectors
     for (ll i = 0; i < Big_Real.size(); i++)
     {
       if (Big_Real[i] != Big_Real_2.Big_Real[i])
       {
-        return 0;
+        return 0; // Return false if any corresponding elements are different
       }
     }
-    return 1;
+    return 1; // All corresponding elements are equal, so return true
   }
 }
 
 bool BigReal::operator!=(BigReal Big_Real_2)
 {
+  // Check if the sizes of the Big_Real vectors are not equal
   if (Big_Real.size() != Big_Real_2.Big_Real.size())
   {
-    return 1;
+    return 1; // Return true if sizes are different (indicating not equal)
   }
   else
   {
+    // Sizes are equal, so we need to compare the elements of the vectors
     for (ll i = 0; i < Big_Real.size(); i++)
     {
       if (Big_Real[i] != Big_Real_2.Big_Real[i])
       {
-        return 1;
+        return 1; // Return true if any corresponding elements are different (indicating not equal)
       }
     }
-    return 0;
+    return 0; // All corresponding elements are equal, so return false (indicating equal)
   }
 }
 
 ostream &operator<<(ostream &out, BigReal Real)
 {
+  // Check if the Big_Real has only ".0" in the end
   if (Real.Big_Real.size() == Real.DecimalSize() + 2 && (Real.Big_Real.back() == '0'))
   {
+    // Create a string 'integer' and copy all elements of Big_Real except the ".0"
     string integer = Real.Big_Real;
     integer.pop_back();
     integer.pop_back();
+
+    // Check if the number has a negative sign, and if so, output '-'
     if (Real.number_sign == -1)
     {
       out << '-';
     }
+    // Output the modified string 'integer'
     out << integer;
   }
   else
   {
+    // Check if the number has a negative sign, and if so, output '-'
     if (Real.number_sign == -1)
     {
       out << '-';
     }
+    // Output the original Big_Real string
     out << Real.Big_Real;
   }
+  // Return the output stream
   return out;
 }
 
 istream &operator>>(istream &in, BigReal &Real)
 {
+  // Define a string 'test_Real' to hold the input
   string test_Real;
+
+  // Read input from the stream into 'test_Real'
   in >> test_Real;
+
+  // Check if 'test_Real' is a valid BigReal
   if (Real.isValidReal(test_Real))
   {
-
+    // If the first character of 'test_Real' is not '-', set 'number_sign' to 1 (positive)
     if (test_Real[0] != '-')
     {
-      Real.number_sign = 1; // returns 1 as a positive value
+      Real.number_sign = 1;
     }
+    // If the first character is '-', set 'number_sign' to -1 (negative)
     else
     {
-      Real.number_sign = -1; // returns -1 as a negative value
+      Real.number_sign = -1;
     }
+
+    // Format 'test_Real' and assign it to 'Big_Real'
     Real.Big_Real = Real.formattedReal(test_Real);
   }
   else
   {
+    // If 'test_Real' is not a valid BigReal, print an error message
     cout << "invalid number";
+
+    // Set 'Big_Real' to "0.0" and 'number_sign' to 1 (default)
     Real.Big_Real = "0.0";
     Real.number_sign = 1;
   }
@@ -544,35 +589,44 @@ istream &operator>>(istream &in, BigReal &Real)
 
 void BigReal::setNum(string realNumber)
 {
+  // Check if 'realNumber' is a valid BigReal
   if (isValidReal(realNumber))
   {
+    // If the first character of 'realNumber' is not '-', set 'number_sign' to 1 (positive)
     if (realNumber[0] != '-')
     {
-      number_sign = 1; // returns 1 as a positive value
+      number_sign = 1;
     }
+    // If the first character is '-', set 'number_sign' to -1 (negative)
     else
     {
-      number_sign = -1; // returns -1 as a negative value
+      number_sign = -1;
     }
+    // Format 'realNumber' and assign it to 'Big_Real'
     Big_Real = formattedReal(realNumber);
   }
   else
   {
+    // If 'realNumber' is not a valid BigReal, print an error message
     cout << "invalid number";
   }
 }
 
 void BigReal::setNum(double realNumber)
 {
+  // Convert the double 'realNumber' to a string for processing
   string number = to_string(realNumber);
 
+  // If the first character of the string is not '-', set 'number_sign' to 1 (positive)
   if (number[0] != '-')
   {
-    number_sign = 1; // returns 1 as a positive value
+    number_sign = 1;
   }
+  // If the first character is '-', set 'number_sign' to -1 (negative)
   else
   {
-    number_sign = -1; // returns -1 as a negative value
+    number_sign = -1;
   }
+  // Format the string 'number' and assign it to 'Big_Real'
   Big_Real = formattedReal(number);
 }
