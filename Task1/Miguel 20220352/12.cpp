@@ -1,5 +1,5 @@
-// File: 3.cpp
-// Purpose: The program take a string and separate all the elements and delete spaces and store it in a vector.
+// File: 12.cpp
+// Purpose:
 // Author: Miguel Reda
 // Section: S9 Wednesday 2nd slot
 // ID:20220352
