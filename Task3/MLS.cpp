@@ -131,8 +131,9 @@ string Machine::int_to_Binary(string s, int n)
     return string();
 }
 
-float Machine::floating_point_to_int(string s)
+float Machine::floating_point_to_int(int n)
 {
+    string s= int_to_Binary(s,n);
     int exp = ((s[1] - '0') * 4 + (s[2] - '0') * 2 + (s[3] - '0') * 1) - 4;
     float r;
     if (exp == -4)
