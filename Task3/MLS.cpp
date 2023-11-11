@@ -108,7 +108,6 @@ string Machine::int_to_Binary(string s,int n)
         {
             s.push_back('1'); // If n is odd, add '1' to the binary representation string.
         }
-        n = floor(n); // Note: The line 'n = floor(n)' does not have any effect and can be removed.
     }
     cout << s; // Print the binary representation.
     return string();
