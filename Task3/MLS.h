@@ -27,8 +27,7 @@ public:
     uint8_t getData(int index);
     void reset();
     void show();
-
-
+    int getInstruction(int index);
 
 };
 
@@ -36,11 +35,15 @@ class Machine {
 private:
     Memory memory;
     Register registers;
-    int PC,IR;
+    int PC = 0;
+    int IR = 0;
+
 public:
+    bool isValidCommand(int IR);
     void exec();
     void reset();
     void show();
+    void mloadFile();
 
 
 };

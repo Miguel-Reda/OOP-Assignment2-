@@ -81,40 +81,75 @@ void Machine::show() {
     memory.show();
 }
 
-void Machine::exec() {
-    int op;
-    cin >> op;
-    if (op == 1){
-        int index,index2;
-        registers[index] = memory[index2];
+int Memory::getInstruction(int index) {
+
+    return ((memory[index] << 8) + memory[index + 1]);
+
+}
+
+void Machine::mloadFile() {
+    cout << "Enter file name: ";
+    string fileName; cin >> fileName;
+    memory.loadFile(fileName);
+
+}
+
+bool Machine::isValidCommand(int IR) {
+    if (((0x1000 <= IR) & (IR < 0x7000)) || ((0xB000 <= IR)&(IR <= 0xC000))){
+        return true;
     }
-    if (op == 2){
-        int index,bitpattern;
-        registers[index] = bitpattern;
+    return false;
+}
+
+void Machine::exec() {
+
+    IR = memory.getInstruction(PC);
+    if (!isValidCommand(IR)){
+        cout << "some instructions arent valid \n";
+        return;
+    }
+    PC += 2 ;
+    int op = (IR >> 12);
+    int R = (IR >> 8)&(0xF);
+    int XY = (IR) & (0xFF);
+    int r = (XY>>4); int s = (XY)&(0xF);
+    if (op == 1){
+        /*registers[R] = memory[XY];*/
+        registers.setData(R,memory.getData(XY));
+    }
+    else if (op == 2){
+
+        /*registers[index] = bitpattern;*/
+        registers.setData(R,XY);
+
     }
     if (op == 3){
-        int rindex,mindex;
-        if (mindex == 0){
-            cout << registers[rindex];
+        if (XY == 0){
+            cout << registers.getData(R);
         }
-        else{
-            memory[mindex] = registers[rindex];
-        }
-
-
+        memory.setData(XY,registers.getData(R));
     }
     if (op == 4){
-        int index1,index2;
-        registers[index2] = registers[index1];
-        registers[index1]= 0;
+        if(R){
+            cout << "not valid command \n";
+            return;
+        }
+        registers.setData(s,registers.getData(r));
     }
     if (op == 5){
-        int res_index,index1,index2;
-        registers[res_index] = registers.add(index1,index2);
+        registers.setData(R,registers.add(r,s));
+
     }
     if (op == 6){}
-    if (op == 11){}
-    /*if (op == 12){}*/
+    if (op == 11){
+        if (registers.getData(R) == registers.getData(0))
+            PC = XY;
+
+    }
+    if (op == 12){
+        return;
+    }
+    exec();
 
 }
 
