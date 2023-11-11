@@ -1,5 +1,6 @@
 #include "MLS.h"
 #include <iomanip>
+#include <cmath>
 using namespace std;
 
 void Memory::loadFile(std::string fileName) {
@@ -94,7 +95,27 @@ void Machine::mloadFile() {
 
 }
 
-bool Machine::isValidCommand(int IR) {
+string Machine::int_to_Binary(string s,int n)
+{ 
+    if (n > 0)
+    {
+        int_to_Binary(n / 2, s); // Recursive call with the quotient of n divided by 2.
+        if (n % 2 == 0)
+        {
+            s.push_back('0'); // If n is even, add '0' to the binary representation string.
+        }
+        else
+        {
+            s.push_back('1'); // If n is odd, add '1' to the binary representation string.
+        }
+        n = floor(n); // Note: The line 'n = floor(n)' does not have any effect and can be removed.
+    }
+    cout << s; // Print the binary representation.
+    return string();
+}
+
+bool Machine::isValidCommand(int IR)
+{
     if (((0x1000 <= IR) & (IR < 0x7000)) || ((0xB000 <= IR)&(IR <= 0xC000))){
         return true;
     }
