@@ -140,7 +140,7 @@ void Machine::exec() {
         registers.setData(R,registers.add(r,s));
 
     }
-    if (op == 6){}
+    // if (op == 6){}
     if (op == 11){
         if (registers.getData(R) == registers.getData(0))
             PC = XY;
