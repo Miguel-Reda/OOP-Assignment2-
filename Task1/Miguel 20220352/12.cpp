@@ -1,5 +1,5 @@
 // File: 12.cpp
-// Purpose:Zebrueburger find the fishing horse in emails to prevent scams.
+// Purpose: find the fishing horse in emails to prevent scams.
 // Author: Miguel Reda
 // Section: S9 Wednesday 2nd slot
 // ID:20220352
