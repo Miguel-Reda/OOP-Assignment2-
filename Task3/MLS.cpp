@@ -113,65 +113,6 @@ void Machine::mloadFile()
     memory.loadFile(fileName);
 }
 
-string Machine::int_to_Binary(string s, int n)
-{
-    if (n > 0)
-    {
-        int_to_Binary(s, n / 2); // Recursive call with the quotient of n divided by 2.
-        if (n % 2 == 0)
-        {
-            s.push_back('0'); // If n is even, add '0' to the binary representation string.
-        }
-        else
-        {
-            s.push_back('1'); // If n is odd, add '1' to the binary representation string.
-        }
-    }
-    cout << s; // Print the binary representation.
-    return string();
-}
-
-float Machine::floating_point_to_int(int n)
-{
-    string s= int_to_Binary(s,n);
-    int exp = ((s[1] - '0') * 4 + (s[2] - '0') * 2 + (s[3] - '0') * 1) - 4;
-    float r;
-    if (exp == -4)
-    {
-        r = (s[4] - '0') / 32.0 + (s[5] - '0') / 64.0 + (s[6] - '0') / 128.0 + (s[7] - '0') / 256.0;
-    }
-    else if (exp == -3)
-    {
-        r = (s[4] - '0') / 16.0 + (s[5] - '0') / 32.0 + (s[6] - '0') / 64.0 + (s[7] - '0') / 128.0;
-    }
-    else if (exp == -2)
-    {
-        r = (s[4] - '0') / 8.0 + (s[5] - '0') / 16.0 + (s[6] - '0') / 32.0 + (s[7] - '0') / 64.0;
-    }
-    else if (exp == -1)
-    {
-        r = (s[4] - '0') / 4.0 + (s[5] - '0') / 8.0 + (s[6] - '0') / 16.0 + (s[7] - '0') / 32.0;
-    }
-    else if (exp == 0)
-    {
-        r = (s[4] - '0') / 2.0 + (s[5] - '0') / 4.0 + (s[6] - '0') / 8.0 + (s[7] - '0') / 16.0;
-    }
-    else if (exp == 1)
-    {
-        r = (s[4] - '0') + (s[5] - '0') / 2.0 + (s[6] - '0') / 4.0 + (s[7] - '0') / 8.0;
-    }
-    else if (exp == 2)
-    {
-        r = (s[4] - '0') * 2 + (s[5] - '0') + (s[6] - '0') / 2.0 + (s[7] - '0') / 4.0;
-    }
-    else if (exp == 3)
-    {
-        r = (s[4] - '0') * 4 + (s[5] - '0') * 2 + (s[6] - '0') + (s[7] - '0') / 2.0;
-    }
-
-    return r;
-}
-
 bool Machine::isValidCommand(int IR)
 {
     if (((0x1000 <= IR) & (IR < 0x7000)) || ((0xB000 <= IR) & (IR <= 0xC000)))
@@ -228,7 +169,6 @@ void Machine::exec()
     {
         registers.setData(R, registers.add(r, s));
     }
-    // if (op == 6){}
     if (op == 11)
     {
         if (registers.getData(R) == registers.getData(0))

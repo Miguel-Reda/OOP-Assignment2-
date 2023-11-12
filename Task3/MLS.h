@@ -40,8 +40,6 @@ private:
     int IR = 0;
 
 public:
-    string int_to_Binary(string s,int n);
-    float floating_point_to_int(int n);
     bool isValidCommand(int IR);
     void exec();
     void reset();
