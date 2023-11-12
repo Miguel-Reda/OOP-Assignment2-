@@ -54,7 +54,7 @@ uint8_t Memory::getData(int index)
     return memory[index];
 }
 
-int8_t Register::getData(int index)
+int Register::getData(int index)
 {
     return registers[index];
 }
@@ -153,7 +153,7 @@ void Machine::exec()
     {
         if (XY == 0)
         {
-            cout << registers.getData(R);
+            cout << registers.getData(R) << endl;
         }
         memory.setData(XY, registers.getData(R));
     }
