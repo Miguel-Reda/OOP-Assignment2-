@@ -31,12 +31,12 @@ public:
     int getInstruction(int index);
 };
 
+int PC = 0;
 class Machine
 {
 private:
     Memory memory;
     Register registers;
-    int PC = 0;
     int IR = 0;
 
 public:

@@ -12,7 +12,10 @@ void Memory::loadFile(std::string fileName)
         cout << "Error" << '\n';
         return;
     }
-    int x1, x2, x3, i(0);
+    int start_address, start_counter;
+    fetch >> start_address >> start_counter;
+    PC = start_counter;
+    int x1, x2, x3, i(start_address);
     while (fetch >> hex >> x1 >> x2 >> x3)
     {
 
@@ -101,7 +104,6 @@ void Machine::show()
 
 int Memory::getInstruction(int index)
 {
-
     return ((memory[index] << 8) + memory[index + 1]);
 }
 
@@ -124,7 +126,6 @@ bool Machine::isValidCommand(int IR)
 
 void Machine::exec()
 {
-
     IR = memory.getInstruction(PC);
     if (!isValidCommand(IR))
     {
