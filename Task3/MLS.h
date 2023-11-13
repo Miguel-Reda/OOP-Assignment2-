@@ -10,7 +10,7 @@ private:
 
 public:
     void setData(int index, int bitPattern); // setter
-    int getData(int index);
+    int8_t getData(int index);
     void reset();
     void show();
     int8_t add(int index, int index2);

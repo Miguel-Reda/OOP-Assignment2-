@@ -27,16 +27,38 @@ void Memory::loadFile(std::string fileName)
         i += 2;
     }
 }
+// void Memory::show()
+// {
+//     for (int i = 0; i < 256; i += 4)
+//     {
+//         for (int j = i; j < i + 4; ++j)
+//         {
+
+//             cout << setw(2) << setfill('0') << hex << uppercase << (int)memory[j] << '\t';
+//         }
+//         cout << '\n';
+//     }
+// }
 void Memory::show()
 {
-    for (int i = 0; i < 256; i += 4)
-    {
-        for (int j = i; j < i + 4; ++j)
-        {
 
-            cout << setw(2) << setfill('0') << hex << uppercase << (int)memory[j] << '\t';
-        }
-        cout << '\n';
+    int Address = 0;
+    cout << "Address    Memory    Address    Memory\n";
+    // for (int i = 0; i < 8; i++)
+    // {
+    // }
+    for (int i = 0; i < 128; i++)
+    {
+        // for (int j = i; j < i + 4; ++j)
+        // {
+        //     cout << setw(2) << setfill('0') << hex << uppercase << (int)memory[j] << '\t';
+        // }
+        cout << "  " << setw(2) << setfill('0') << hex << Address << "\t     ";
+        cout << setw(2) << setfill('0') << hex << uppercase << (int)memory[i];
+        i += 128, Address += 128;
+        cout << "\t       " << setw(2) << setfill('0') << hex << Address << "\t  ";
+        cout << setw(2) << setfill('0') << hex << uppercase << (int)memory[i] << '\n';
+        i -= 128, Address -= 127;
     }
 }
 
@@ -54,7 +76,7 @@ uint8_t Memory::getData(int index)
     return memory[index];
 }
 
-int Register::getData(int index)
+int8_t Register::getData(int index)
 {
     return registers[index];
 }
@@ -69,16 +91,30 @@ void Register::reset()
     fill(registers, registers + 16, 0);
 }
 
+// void Register::show()
+// {
+//     for (int i = 0; i < 16; i += 2)
+//     {
+//         for (int j = i; j < i + 2; ++j)
+//         {
+
+//             cout << setw(2) << setfill('0') << hex << uppercase << (int)registers[j] << '\t';
+//         }
+//         cout << '\n';
+//     }
+// }
 void Register::show()
 {
-    for (int i = 0; i < 16; i += 2)
+    int Address = 0;
+    cout << "Address    Register    Address    Register\n";
+    for (int i = 0; i < 8; i++)
     {
-        for (int j = i; j < i + 2; ++j)
-        {
-
-            cout << setw(2) << setfill('0') << hex << uppercase << (int)registers[j] << '\t';
-        }
-        cout << '\n';
+        cout << "  " << hex << Address << "\t     ";
+        cout << setw(2) << setfill('0') << hex << uppercase << (int)registers[i];
+        i += 8, Address += 8;
+        cout << "\t\t " << hex << Address << "\t    ";
+        cout << setw(2) << setfill('0') << hex << uppercase << (int)registers[i] << '\n';
+        i -= 8, Address -= 7;
     }
 }
 int8_t Register::add(int index, int index2)
@@ -153,7 +189,7 @@ void Machine::exec()
     {
         if (XY == 0)
         {
-            cout << registers.getData(R) << endl;
+            cout << registers.getData(R);
         }
         memory.setData(XY, registers.getData(R));
     }
