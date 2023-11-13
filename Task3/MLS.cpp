@@ -43,11 +43,11 @@ void Memory::show()
 {
 
     int Address = 0;
-    cout << "Address    Memory    Address    Memory\n";
+    cout << "Address    Memory    Address    Memory    Address    Memory    Address    Memory\n";
     // for (int i = 0; i < 8; i++)
     // {
     // }
-    for (int i = 0; i < 128; i++)
+    for (int i = 0; i < 64; i++)
     {
         // for (int j = i; j < i + 4; ++j)
         // {
@@ -55,10 +55,16 @@ void Memory::show()
         // }
         cout << "  " << setw(2) << setfill('0') << hex << Address << "\t     ";
         cout << setw(2) << setfill('0') << hex << uppercase << (int)memory[i];
-        i += 128, Address += 128;
+        i += 64, Address += 64;
         cout << "\t       " << setw(2) << setfill('0') << hex << Address << "\t  ";
+        cout << setw(2) << setfill('0') << hex << uppercase << (int)memory[i];
+        i += 64, Address += 64;
+        cout << "\t    " << setw(2) << setfill('0') << hex << Address << "\t       ";
+        cout << setw(2) << setfill('0') << hex << uppercase << (int)memory[i];
+        i += 64, Address += 64;
+        cout << "\t " << setw(2) << setfill('0') << hex << Address << "\t    ";
         cout << setw(2) << setfill('0') << hex << uppercase << (int)memory[i] << '\n';
-        i -= 128, Address -= 127;
+        i -= 192, Address -= 191;
     }
 }
 
@@ -132,8 +138,8 @@ void Machine::reset()
 
 void Machine::show()
 {
-    cout << "PC: " << PC << " \n";
-    cout << "IR: " << IR << '\n';
+    cout << "PC: " << hex << PC << " \n";
+    cout << "IR: " << hex << uppercase << IR << '\n';
     registers.show();
     memory.show();
 }
