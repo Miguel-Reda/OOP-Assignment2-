@@ -14,7 +14,6 @@ public:
     void reset();
     void show();
     int8_t add(int index, int index2);
-    int add2(int index, int index2);
 };
 
 class Memory
