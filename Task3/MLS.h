@@ -3,7 +3,15 @@
 #include <fstream>
 using namespace std;
 
-class Register
+class Memory
+{
+public:
+    virtual void setData(int index, int bitPattern) = 0;
+    virtual void reset() = 0;
+    virtual void show() = 0;
+};
+
+class Register : public Memory
 {
 private:
     int8_t registers[16] = {0};
@@ -16,7 +24,7 @@ public:
     int8_t add(int index, int index2);
 };
 
-class Memory
+class MainMemory : public Memory
 {
 private:
     uint8_t memory[256] = {0};
@@ -34,7 +42,7 @@ int PC = 0;
 class Machine
 {
 private:
-    Memory memory;
+    MainMemory memory;
     Register registers;
     int IR = 0;
 

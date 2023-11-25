@@ -3,7 +3,7 @@
 #include <cmath>
 using namespace std;
 
-void Memory::loadFile(std::string fileName)
+void MainMemory::loadFile(std::string fileName)
 {
     ifstream fetch(fileName);
 
@@ -18,7 +18,6 @@ void Memory::loadFile(std::string fileName)
     int x1, x2, x3, i(start_address);
     while (fetch >> hex >> x1 >> x2 >> x3)
     {
-
         if (i > 254)
             break;
         memory[i] = (x1 << 4) + x2;
@@ -27,32 +26,15 @@ void Memory::loadFile(std::string fileName)
         i += 2;
     }
 }
-// void Memory::show()
-// {
-//     for (int i = 0; i < 256; i += 4)
-//     {
-//         for (int j = i; j < i + 4; ++j)
-//         {
 
-//             cout << setw(2) << setfill('0') << hex << uppercase << (int)memory[j] << '\t';
-//         }
-//         cout << '\n';
-//     }
-// }
-void Memory::show()
+void MainMemory::show()
 {
 
     int Address = 0;
     cout << "Address    Memory    Address    Memory    Address    Memory    Address    Memory\n";
-    // for (int i = 0; i < 8; i++)
-    // {
-    // }
+
     for (int i = 0; i < 64; i++)
     {
-        // for (int j = i; j < i + 4; ++j)
-        // {
-        //     cout << setw(2) << setfill('0') << hex << uppercase << (int)memory[j] << '\t';
-        // }
         cout << "  " << setw(2) << setfill('0') << hex << Address << "\t     ";
         cout << setw(2) << setfill('0') << hex << uppercase << (int)memory[i];
         i += 64, Address += 64;
@@ -68,16 +50,16 @@ void Memory::show()
     }
 }
 
-void Memory::setData(int index, int bitPattern)
+void MainMemory::setData(int index, int bitPattern)
 {
     memory[index] = bitPattern;
 }
-void Memory::reset()
+void MainMemory::reset()
 {
     fill(memory, memory + 256, 0);
 };
 
-uint8_t Memory::getData(int index)
+uint8_t MainMemory::getData(int index)
 {
     return memory[index];
 }
@@ -97,18 +79,6 @@ void Register::reset()
     fill(registers, registers + 16, 0);
 }
 
-// void Register::show()
-// {
-//     for (int i = 0; i < 16; i += 2)
-//     {
-//         for (int j = i; j < i + 2; ++j)
-//         {
-
-//             cout << setw(2) << setfill('0') << hex << uppercase << (int)registers[j] << '\t';
-//         }
-//         cout << '\n';
-//     }
-// }
 void Register::show()
 {
     int Address = 0;
@@ -144,7 +114,7 @@ void Machine::show()
     memory.show();
 }
 
-int Memory::getInstruction(int index)
+int MainMemory::getInstruction(int index)
 {
     return ((memory[index] << 8) + memory[index + 1]);
 }
