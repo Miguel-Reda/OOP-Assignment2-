@@ -3,7 +3,7 @@
 #include <fstream>
 using namespace std;
 
-class Memory
+class Memory //Abstract class
 {
 public:
     virtual void setData(int index, int bitPattern) = 0;

@@ -3,6 +3,41 @@
 #include <cmath>
 using namespace std;
 
+int8_t Register::getData(int index)
+{
+    return registers[index];
+}
+
+void Register::setData(int index, int bitPattern)
+{
+    registers[index] = bitPattern;
+}
+
+void Register::reset()
+{
+    fill(registers, registers + 16, 0);
+}
+
+void Register::show()
+{
+    int Address = 0;
+    cout << "Address    Register    Address    Register\n";
+    for (int i = 0; i < 8; i++)
+    {
+        cout << "  " << hex << Address << "\t     ";
+        cout << setw(2) << setfill('0') << hex << uppercase << (int)registers[i];
+        i += 8, Address += 8;
+        cout << "\t\t " << hex << Address << "\t    ";
+        cout << setw(2) << setfill('0') << hex << uppercase << (int)registers[i] << '\n';
+        i -= 8, Address -= 7;
+    }
+}
+
+int8_t Register::add(int index, int index2)
+{
+    return registers[index] + registers[index2];
+}
+
 void MainMemory::loadFile(std::string fileName)
 {
     ifstream fetch(fileName);
@@ -13,7 +48,7 @@ void MainMemory::loadFile(std::string fileName)
         return;
     }
     int start_address, start_counter;
-    fetch >> start_address >> start_counter;
+    fetch >> hex >> start_address >> start_counter;
     PC = start_counter;
     int x1, x2, x3, i(start_address);
     while (fetch >> hex >> x1 >> x2 >> x3)
@@ -54,6 +89,7 @@ void MainMemory::setData(int index, int bitPattern)
 {
     memory[index] = bitPattern;
 }
+
 void MainMemory::reset()
 {
     fill(memory, memory + 256, 0);
@@ -64,38 +100,9 @@ uint8_t MainMemory::getData(int index)
     return memory[index];
 }
 
-int8_t Register::getData(int index)
+int MainMemory::getInstruction(int index)
 {
-    return registers[index];
-}
-
-void Register::setData(int index, int bitPattern)
-{
-    registers[index] = bitPattern;
-}
-
-void Register::reset()
-{
-    fill(registers, registers + 16, 0);
-}
-
-void Register::show()
-{
-    int Address = 0;
-    cout << "Address    Register    Address    Register\n";
-    for (int i = 0; i < 8; i++)
-    {
-        cout << "  " << hex << Address << "\t     ";
-        cout << setw(2) << setfill('0') << hex << uppercase << (int)registers[i];
-        i += 8, Address += 8;
-        cout << "\t\t " << hex << Address << "\t    ";
-        cout << setw(2) << setfill('0') << hex << uppercase << (int)registers[i] << '\n';
-        i -= 8, Address -= 7;
-    }
-}
-int8_t Register::add(int index, int index2)
-{
-    return registers[index] + registers[index2];
+    return ((memory[index] << 8) + memory[index + 1]);
 }
 
 void Machine::reset()
@@ -112,11 +119,6 @@ void Machine::show()
     cout << "IR: " << hex << uppercase << IR << '\n';
     registers.show();
     memory.show();
-}
-
-int MainMemory::getInstruction(int index)
-{
-    return ((memory[index] << 8) + memory[index + 1]);
 }
 
 void Machine::mloadFile()
